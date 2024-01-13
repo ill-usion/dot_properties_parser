@@ -1,0 +1,1 @@
+window.ALL_CRATES = ["dot_properties_parser"];
