@@ -1,5 +1,7 @@
 # dot properties parser
 
+[![Tests](https://github.com/ill-usion/dot_properties_parser/actions/workflows/tests.yml/badge.svg)](https://github.com/ill-usion/dot_properties_parser/actions/workflows/tests.yml)
+
 A simple `.properties` file parser.
 ### Note:
 This only supports reading, for now.
