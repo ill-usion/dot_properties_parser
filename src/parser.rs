@@ -51,6 +51,31 @@ impl PropertyValue {
     }
 }
 
+macro_rules! impl_into_property_value {
+    ($($type:ty),*) => {
+        $(
+            impl From<$type> for PropertyValue {
+                fn from(value: $type) -> Self {
+                    PropertyValue(value.to_string())
+                }
+            }
+        )*
+    };
+}
+
+// Generate implementations for different rust types
+#[rustfmt::skip]
+impl_into_property_value!(
+    i8, u8, 
+    i16, u16, 
+    i32, u32, 
+    i64, u64, 
+    i128, u128, 
+    f32, f64, 
+    isize, usize, 
+    char, bool
+);
+
 impl AsRef<str> for PropertyValue {
     fn as_ref(&self) -> &str {
         &self.0
@@ -77,7 +102,7 @@ impl Display for PropertyValue {
 /// ```
 /// use std::path::Path;
 /// use dot_properties_parser::parse_properties_file;
-/// 
+///
 /// let props = parse_properties_file(Path::new(".common/server.properties"), None).unwrap();
 /// for (k, v) in props {
 ///     println!("{}: {}", k, v);
