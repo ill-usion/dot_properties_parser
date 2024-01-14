@@ -3,7 +3,7 @@ mod test {
     use std::path::Path;
 
     use dot_properties_parser::{
-        parse_properties_file, DotPropertiesConfig,
+        parse_properties_file, DotPropertiesConfig, PropertyValue,
     };
 
     #[test]
@@ -63,5 +63,20 @@ mod test {
             .get("player-movement-action-direction-threshold")
             .unwrap()
             .value_as();
+    }
+
+    #[test]
+    fn test_into() {
+        let _integer: PropertyValue = 123.into();
+        let _float: PropertyValue = 12.3.into();
+        let _bool: PropertyValue = true.into();
+        let _size: PropertyValue = 123usize.into();
+        let _char: PropertyValue = 'a'.into();
+
+        assert_eq!(_integer.as_ref(), "123");
+        assert_eq!(_float.as_ref(), "12.3");
+        assert_eq!(_bool.as_ref(), "true");
+        assert_eq!(_size.as_ref(), "123");
+        assert_eq!(_char.as_ref(), "a");
     }
 }
